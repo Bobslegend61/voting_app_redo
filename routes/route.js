@@ -2,10 +2,28 @@
 const express = require("express");
 
 // define router
-let router = express.Router()
+let router = express.Router();
 
-router.get("/home", (req, res) => {
-    res.send("Working")
+// user model
+let User = require("../model/user");
+// topic model
+let Topic = require("../model/topic");
+
+router.get("/getalltopics", (req, res) => {
+    Topic.getAllTopics((err, doc) => {
+        // send error message if any
+        if(err) {
+            res.json({
+                success: false,
+                message: err
+            });
+        }
+        // successfull
+        res.json({
+            success: true,
+            data: doc
+        });
+    });
 })
 
 module.exports = router;

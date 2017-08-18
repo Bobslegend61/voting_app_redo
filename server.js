@@ -23,6 +23,11 @@ mongoose.connect(config.database);
 // connected successuflly to db
 mongoose.connection.on("connected", () => {
     console.log("Successfully connected to db");
+});
+
+// handle error on connection to db
+mongoose.connection.on("error", (err) => {
+    console.log("Error connecting to database: "+ err);
 })
 
 // ADD MIDDLEWARE

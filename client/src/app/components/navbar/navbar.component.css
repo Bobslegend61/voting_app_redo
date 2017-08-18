@@ -1,0 +1,21 @@
+nav {
+    font-size: 1.1em;
+}
+
+nav button {
+    background-color: #e57373;
+}
+
+nav button:hover {
+    background-color: #e57373 ;
+    color: #fff;
+    border: 1px solid #c62828;
+}
+
+input.ng-pristine, input.ng-invalid {
+    border-left: 5px solid #ef9a9a;
+}
+
+input.ng-valid {
+    border-left: 5px solid #a5d6a7;
+}
