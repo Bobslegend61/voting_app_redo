@@ -9,7 +9,12 @@ export class ModelService {
   constructor(private http: Http) { }
   
   // get all topics
-  getAllTopics() {
+  public getAllTopics() {
     return this.http.get(`${this.host}getalltopics`).map(res => res.json());
+  }
+
+  // signup
+  public signup(data: any) {
+    return this.http.post(`${this.host}signup`, data).map(res => res.json())
   }
 }

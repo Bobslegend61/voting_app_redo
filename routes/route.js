@@ -13,7 +13,7 @@ router.get("/getalltopics", (req, res) => {
     Topic.getAllTopics((err, doc) => {
         // send error message if any
         if(err) {
-            res.json({
+           return res.json({
                 success: false,
                 message: err
             });
@@ -24,6 +24,21 @@ router.get("/getalltopics", (req, res) => {
             data: doc
         });
     });
-})
+});
+
+router.post("/signup", (req,res) => {
+    User.signUp(req.body.username, req.body.password, (err, doc) => {
+        if(err) {
+           return res.json({
+                success: false,
+                message: err
+            })
+        }
+        res.json({
+            success: true,
+            data: doc
+        })
+    });
+});
 
 module.exports = router;

@@ -43,7 +43,7 @@ let topicSchema = mongoose.Schema({
 });
 
 // define model
-let Topic = module.exports = mongoose.model("topics", topicSchema);
+let Topic = module.exports = mongoose.model("topic", topicSchema);
 
 // METHODS
 // get all topics

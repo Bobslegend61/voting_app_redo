@@ -18,7 +18,7 @@ let app = express();
 const PORT = process.env.PORT || 3000;
 
 // connect to mongoose
-mongoose.connect(config.database);
+mongoose.connect(config.database, { useMongoClient: true });
 
 // connected successuflly to db
 mongoose.connection.on("connected", () => {
@@ -31,7 +31,6 @@ mongoose.connection.on("error", (err) => {
 })
 
 // ADD MIDDLEWARE
-app.use("/", routes);
 // cors
 app.use(cors());
 // body-parser
@@ -41,6 +40,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // morgan
 app.use(morgan('dev'))
+// routes
+app.use("/", routes);
 
 // static dir
 app.use(express.static(path.join(__dirname, "public")));

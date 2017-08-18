@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("../bcrypt/bcrypt");
 
 // define schema
 userSchema = mongoose.Schema({
@@ -14,7 +15,7 @@ userSchema = mongoose.Schema({
 });
 
 // define model
-let User = module.exports = mongoose.model("voting-user", userSchema);
+let User = module.exports = mongoose.model("user", userSchema);
 
 // METHODS 
 // new user
@@ -35,6 +36,15 @@ module.exports.signUp = (username, password, callback) => {
                 password: password
             }
             // encryption of password
+            bcrypt(userData.password,(err, hash) => {
+                if(err) {
+                    return callback("Error hashing password");
+                }
+                // set hash
+                userData.password = hash;
+                newUser = new User(userData);
+                newUser.save(callback);
+            })
         }
     })
 }
