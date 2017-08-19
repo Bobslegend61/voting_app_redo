@@ -27,7 +27,7 @@ router.get("/getalltopics", (req, res) => {
 });
 
 router.post("/signup", (req,res) => {
-    User.signUp(req.body.username, req.body.password, (err, doc) => {
+    User.signUp(req.body.username.toLowerCase(), req.body.password, (err, doc) => {
         if(err) {
            return res.json({
                 success: false,

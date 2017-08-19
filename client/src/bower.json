@@ -1,0 +1,21 @@
+{
+  "name": "votingApp",
+  "homepage": "https://github.com/Bobslegend61/voting_app_redo",
+  "authors": [
+    "Alabi Emmanuel <bobslegend795@gmail.com>"
+  ],
+  "description": "freecodecamp baseline",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-beta",
+    "font-awesome": "Font-Awesome#^4.7.0"
+  }
+}

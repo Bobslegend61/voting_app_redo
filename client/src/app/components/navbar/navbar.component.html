@@ -1,25 +1,68 @@
-<nav class="navbar navbar-toggleable-md navbar-light" style="background-color: #c62828;">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand text-white" routerLink="/">fcc-voting</a>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/signup" routerLinkActive="active">Sign Up</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
-          <input class="form-control mr-sm-2" #nameRef="ngModel" name="username" type="text" placeholder="username" ngModel required>
-          <input class="form-control mr-sm-2" #pwdRef="ngModel" name="password" type="password" placeholder="password" ngModel required>
-          <button class="btn my-2 my-sm-0" type="submit" [disabled]="nameRef.invalid || pwdRef.invalid">Login</button>
-        </form>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #c62828;">
+  <a class="navbar-brand text-white" routerLink="/">fcc-voting</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/profile" routerLinkActive="active">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/signup" routerLinkActive="active" data-toggle="modal" data-target="#exampleModal">Sign Up</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+      <input class="form-control mr-sm-2" #nameRef="ngModel" name="username" type="text" placeholder="username" ngModel required>
+      <input class="form-control mr-sm-2" #pwdRef="ngModel" name="password" type="password" placeholder="password" ngModel required>
+      <button class="btn my-2 my-sm-0" type="submit" [disabled]="nameRef.invalid || pwdRef.invalid">Login <i *ngIf="loginSpin" class="fa fa-spinner fa-spin" aria-hidden="true"></i></button>
+    </form>
+  </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">SIGN UP</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="resetForm()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup] = "signUpForm" (ngSubmit)="signup()" novalidate>
+              <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="successMessage">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  {{successMessage}} <a href="#" class="alert-link" data-dismiss="modal" aria-label="Close" (click)="resetForm()"><strong>Login Here</strong></a>
+              </div>
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="errorMessage">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Alert!</strong> {{errorMessage}}
+              </div>
+              <div class="form-group">
+                  <label for="exampleInputEmail1">username</label>
+                  <input type="text" #refName class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username" formControlName="username">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Confirm Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm" formControlName="confirmPassword">
+              </div>
+                <button type="submit" class="btn text-white float-right" [disabled]="!signUpForm.valid">Submit <i *ngIf="signUpSpin" class="fa fa-spinner fa-spin" aria-hidden="true"></i></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
