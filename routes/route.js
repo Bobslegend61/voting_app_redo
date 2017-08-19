@@ -42,7 +42,7 @@ router.post("/signup", (req,res) => {
 });
 
 router.post("/login", (req, res) => {
-    User.logIn(req.body.username, req.body.password, (err, doc) => {
+    User.logIn(req.body.username.toLowerCase(), req.body.password, (err, doc) => {
         if(err) {
             return res.json({
                 success: false,
