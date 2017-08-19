@@ -42,7 +42,19 @@ router.post("/signup", (req,res) => {
 });
 
 router.post("/login", (req, res) => {
-    
+    User.logIn(req.body.username, req.body.password, (err, doc) => {
+        if(err) {
+            return res.json({
+                success: false,
+                message: err
+            });
+        }
+
+        res.json({
+            success: true,
+            data: doc
+        })
+    })
 });
 
 module.exports = router;

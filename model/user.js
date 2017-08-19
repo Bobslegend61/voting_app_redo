@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
+const config = require("../config/config");
 const bcrypt = require("../bcrypt/bcrypt");
 
 // define schema
@@ -57,8 +60,16 @@ module.exports.logIn = (username, password, callback) => {
 
         if(user) {
             // compare password
+            bcrypt.comfirmPassword(password, user.password, (err, done) => {
+                if(err) {
+                    return callback(err);
+                }
+                // sign token
+                let token = jwt.sign({username: username}, config.secret);
+                callback(null, {token: token, username: user.username});
+            });
         }else {
-
+            callback("Incorrect credentials");
         }
     })
 }
