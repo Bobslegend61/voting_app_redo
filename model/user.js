@@ -36,7 +36,7 @@ module.exports.signUp = (username, password, callback) => {
                 password: password
             }
             // encryption of password
-            bcrypt(userData.password,(err, hash) => {
+            bcrypt.createHash(userData.password,(err, hash) => {
                 if(err) {
                     return callback("Error hashing password");
                 }
@@ -45,6 +45,20 @@ module.exports.signUp = (username, password, callback) => {
                 newUser = new User(userData);
                 newUser.save(callback);
             })
+        }
+    })
+}
+
+module.exports.logIn = (username, password, callback) => {
+    User.findOne({username: username}, (err, user) => {
+        if(err) {
+            return callback("Error getting user");
+        }
+
+        if(user) {
+            // compare password
+        }else {
+
         }
     })
 }
