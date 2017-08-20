@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
+import { JwtHelper } from "angular2-jwt";
 
 import { ModelService } from "../../services/model.service";
 import { AuthService } from "../../services/auth.service";
@@ -11,12 +12,16 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  public jwtHelper: JwtHelper = new JwtHelper();
+
   public signUpSpin: boolean = false;
   public loginSpin: boolean = false;
   public errorMessage: String;
   public successMessage: String;
   public loginErrorMessage: String;
-  public username: String;
+  public username: String = localStorage.getItem("token") ? this.jwtHelper.decodeToken(localStorage.getItem("token")).username : null;
+ 
+
   public signUpForm: FormGroup;
 
   constructor(private auth: AuthService, private model: ModelService, private _formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,) { }
@@ -40,10 +45,10 @@ export class NavbarComponent implements OnInit {
     this.loginSpin = true;
     this.model.logIn(value).subscribe(data => {
       if(data.success){
-        console.log(data);
         this.loginSpin = false;
         this.loginErrorMessage = null;
         localStorage.setItem("token", data.data.token);
+
         this.username = data.data.username;
       }else{
         this.loginSpin = false;
