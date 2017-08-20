@@ -1,37 +1,23 @@
 <div class="container my-3" id="home">
-  <div class="card">
-      <div class="card-block">
-        <h4 class="card-title">Card title</h4>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="card-link">View</a>
+  <button type="button" class="btn btn-light btn-sm btn-block m-3" routerLink="/createpoll" *ngIf="auth.loggedIn()">Create Poll</button>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Special title treatment</h4>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-light">Go somewhere</a>
+        </div>
       </div>
     </div>
-    <div class="card">
-        <div class="card-block">
-          <h4 class="card-title">Card title</h4>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">View</a>
+    <div class="col-sm-12 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Special title treatment</h4>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-light">Go somewhere</a>
         </div>
       </div>
-
-      <div class="row">
-          <div class="col-sm-12 col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Special title treatment</h4>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-light">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-6">
-            <div class="card">
-              <div class="card-body">
-                <h4 class="card-title">Special title treatment</h4>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-light">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-        </div>
+    </div>
+  </div>
 </div>

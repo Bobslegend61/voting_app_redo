@@ -11,13 +11,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 
+
 // SERVICES
 import { ModelService } from "./services/model.service";
+import { AuthService } from "./services/auth.service";
+import { CreatePollComponent } from './components/create-poll/create-poll.component';
 
 // define routes
 const appRoutes: Routes = [
   { path: "", component: MainpageComponent},
-  { path: "home", component: HomeComponent }
+  { path: "home", component: HomeComponent },
+  { path: "createpoll", component: CreatePollComponent }
 ];
 
 @NgModule({
@@ -26,7 +30,8 @@ const appRoutes: Routes = [
     MainpageComponent,
     NavbarComponent,
     HomeComponent,
-    FooterComponent
+    FooterComponent,
+    CreatePollComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [ModelService],
+  providers: [ModelService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // import service
 import { ModelService } from "../../services/model.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { ModelService } from "../../services/model.service";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private model: ModelService) { }
+  constructor(private model: ModelService, private auth: AuthService) { }
 
   ngOnInit() {
     this.model.getAllTopics().subscribe(data => {

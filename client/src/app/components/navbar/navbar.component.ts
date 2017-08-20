@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { ModelService } from "../../services/model.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -14,9 +15,11 @@ export class NavbarComponent implements OnInit {
   public loginSpin: boolean = false;
   public errorMessage: String;
   public successMessage: String;
+  public loginErrorMessage: String;
+  public username: String;
   public signUpForm: FormGroup;
 
-  constructor(private model: ModelService, private _formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,) { }
+  constructor(private auth: AuthService, private model: ModelService, private _formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router,) { }
 
   ngOnInit() {
     this.signUpForm =  this._formBuilder.group({
@@ -26,11 +29,30 @@ export class NavbarComponent implements OnInit {
     })
   }
 
+  public logout(){
+    this.username = null;
+    localStorage.clear();
+    this.router.navigate(["/home"]);
+    return false;
+  }
+
   public login(value){
     this.loginSpin = true;
     this.model.logIn(value).subscribe(data => {
-      console.log(data);
-    })
+      if(data.success){
+        console.log(data);
+        this.loginSpin = false;
+        this.loginErrorMessage = null;
+        localStorage.setItem("token", data.data.token);
+        this.username = data.data.username;
+      }else{
+        this.loginSpin = false;
+        return this.loginErrorMessage = data.message; 
+      }
+    }, err => {
+      this.loginSpin = false;
+      return this.loginErrorMessage = "Error reaching database"; 
+    });
   }
 
   resetForm(){
