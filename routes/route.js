@@ -1,5 +1,6 @@
 // import express
 const express = require("express");
+const passport = require("passport");
 
 // define router
 let router = express.Router();
@@ -56,5 +57,9 @@ router.post("/login", (req, res) => {
         })
     })
 });
+
+router.get("/check", passport.authenticate("jwt", {session: false}), (req, res) => {
+    res.send("Okkkkk");
+})
 
 module.exports = router;

@@ -28,7 +28,9 @@ export class NavbarComponent implements OnInit {
 
   public login(value){
     this.loginSpin = true;
-    console.log(value);
+    this.model.logIn(value).subscribe(data => {
+      console.log(data);
+    })
   }
 
   resetForm(){
@@ -51,6 +53,9 @@ export class NavbarComponent implements OnInit {
           this.signUpSpin = false;
           return this.errorMessage = data.message;
         }
+      }, err => {
+        this.signUpSpin = false;
+        return this.errorMessage = "Error reaching server";
       })
     }else{
       this.errorMessage = "Password do not match";

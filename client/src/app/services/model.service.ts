@@ -14,7 +14,23 @@ export class ModelService {
   }
 
   // signup
-  public signup(data: any) {
+  public signup(data: userSignupData) {
     return this.http.post(`${this.host}signup`, data).map(res => res.json())
   }
+
+  // login
+  public logIn(data: userLoginData) {
+    return this.http.post(`${this.host}login`, data).map(res => res.json());
+  }
+}
+
+interface userLoginData {
+  username: String,
+  password: String
+}
+
+interface userSignupData {
+  username: String,
+  password: String,
+  confirmPassword: String
 }

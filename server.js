@@ -5,11 +5,14 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
+const passport = require("passport");
+let JwtStrategy = require("passport-jwt").Strategy;
 
 
 // require local dependencies
 const routes = require("./routes/route");
 const config = require("./config/config");
+let options = require("./passport/passport");
 
 // define app
 let app = express();
@@ -39,7 +42,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json 
 app.use(bodyParser.json());
 // morgan
-app.use(morgan('dev'))
+app.use(morgan('dev'));
+// passport
+passport.use(new JwtStrategy(options, (jwt_payload, done) => {
+    return done(null, true);
+}))
 // routes
 app.use("/", routes);
 

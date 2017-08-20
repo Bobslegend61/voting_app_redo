@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
+const passport = require("passport");
+let JwtStrategy = require("passport-jwt").Strategy;
+let options = require("../passport/passport");
+
 const config = require("../config/config");
 const bcrypt = require("../bcrypt/bcrypt");
 
@@ -73,3 +77,4 @@ module.exports.logIn = (username, password, callback) => {
         }
     })
 }
+
