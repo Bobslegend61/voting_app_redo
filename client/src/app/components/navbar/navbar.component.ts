@@ -12,14 +12,13 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public jwtHelper: JwtHelper = new JwtHelper();
-
+  
   public signUpSpin: boolean = false;
   public loginSpin: boolean = false;
   public errorMessage: String;
   public successMessage: String;
   public loginErrorMessage: String;
-  public username: String = localStorage.getItem("token") ? this.jwtHelper.decodeToken(localStorage.getItem("token")).username : null;
+  public username: String = this.auth.getUsername();
  
 
   public signUpForm: FormGroup;

@@ -1,3 +1,22 @@
-<p>
-  create-poll works!
-</p>
+<div class="container create-polls">
+  <p class="h4 text-center text-muted mt-4">Create Poll</p>  
+  <hr class="w-25 bg-dark">
+  <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>
+  <form class="w-75 mx-auto" [formGroup]="pollsForm" #pollForm (ngSubmit)="submitPoll()">
+    <div class="form-group mb-3">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" placeholder="Topic title" formControlName="title">
+      <p class="text-danger" *ngIf="pollsForm.controls['title'].hasError('required') && pollsForm.controls['title'].dirty">* Field is required</p>
+    </div>
+    <div class="from-group mb-3">
+      <label for="info">Info</label>
+      <textarea placeholder="A little info about the topic" id="info" class="form-control" formControlName="info"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="options">Your Options</label>
+      <input type="text" class="form-control" id="options" placeholder="Comma (,) seperated please" formControlName="options">
+      <small id="options" class="form-text text-muted">Comma (,) seperated please</small>
+    </div>
+    <button type="submit" class="btn btn-outline-secondary btn-block btn-lg">Create poll</button>
+  </form>
+</div>

@@ -27,6 +27,7 @@
         "bower_components/jquery/dist/jquery.slim.js",
         "bower_components/popper.js/dist/umd/popper.min.js",
         "bower_components/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/chart.js/dist/Chart.min.js",
         "app.js"
       ],
       "environmentSource": "environments/environment.ts",

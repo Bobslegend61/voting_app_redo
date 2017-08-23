@@ -1,21 +1,14 @@
 <div class="container my-3" id="home">
   <button type="button" class="btn btn-light btn-sm btn-block m-3" routerLink="/createpoll" *ngIf="auth.loggedIn()">Create Poll</button>
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Special title treatment</h4>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-light">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Special title treatment</h4>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-light">Go somewhere</a>
+  <div *ngIf="allTopics">
+    <div class="row" *ngFor="let item of allTopics.data">
+      <div class="col-sm-12 col-md-6 mb-2" *ngFor="let s of item.topic">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">{{s.title}} <small class="float-right font-italic text-muted">{{s.date | date}}</small></h4>
+            <p class="card-text">{{s.info}}</p>
+            <a (click)="goSingle(item.author, s.title)" href="#" class="btn btn-light">View</a>
+          </div>
         </div>
       </div>
     </div>

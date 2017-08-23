@@ -1,0 +1,7 @@
+.create-polls form input:focus, .create-polls form textarea:focus {
+    border-color: lightslategrey;
+}
+
+.ng-invalid {
+    border-color: #c62828;
+}

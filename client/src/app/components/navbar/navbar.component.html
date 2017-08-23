@@ -16,7 +16,7 @@
         <a class="nav-link" routerLink="/signup" routerLinkActive="active" data-toggle="modal" data-target="#exampleModal">Sign Up</a>
       </li>
     </ul>
-    <ul class="navbar-nav" *ngIf="auth.loggedIn()">
+    <ul class="navbar-nav mr-5" *ngIf="auth.loggedIn()">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{username | uppercase}}
