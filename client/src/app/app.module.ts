@@ -11,22 +11,25 @@ import { MainpageComponent } from './components/mainpage/mainpage.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
-
-
-// SERVICES
-import { ModelService } from "./services/model.service";
-import { AuthService } from "./services/auth.service";
 import { CreatePollComponent } from './components/create-poll/create-poll.component';
 import { SingleViewComponent } from './components/single-view/single-view.component';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
+// SERVICES
+import { ModelService } from "./services/model.service";
+import { AuthService } from "./services/auth.service";
+import { AuthGuard } from "./guard/guard.service";
+
 
 // define routes
 const appRoutes: Routes = [
   { path: "", component: MainpageComponent},
   { path: "home", component: HomeComponent },
-  { path: "createpoll", component: CreatePollComponent },
-  { path: "view/:username", component: SingleViewComponent }
+  { path: "createpoll", component: CreatePollComponent, canActivate: [AuthGuard] },
+  { path: "view/:username", component: SingleViewComponent },
+  { path: "profile/:username", component: ProfileComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -40,6 +43,7 @@ const appRoutes: Routes = [
     SingleViewComponent,
     BarChartComponent,
     PieChartComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ChartsModule
   ],
-  providers: [ModelService, AuthService],
+  providers: [ModelService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

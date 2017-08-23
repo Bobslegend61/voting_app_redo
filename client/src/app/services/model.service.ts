@@ -15,7 +15,10 @@ export class ModelService {
 
   // create poll
   public createPoll(data: createPoll) {
-    return this.http.post(`${this.host}createpoll`, data).map(res => res.json());
+    let headers = new Headers();
+    let token = "JWT "+ localStorage.getItem("token");
+    headers.append("Authorization", token)
+    return this.http.post(`${this.host}createpoll`, data, {headers: headers}).map(res => res.json());
   }
 
   // signup
@@ -45,12 +48,34 @@ export class ModelService {
 
   // add
   public onAdd(data: add) {
-    return this.http.post(`${this.host}add`, data).map(res => res.json());
+    let headers = new Headers();
+    let token = "JWT "+ localStorage.getItem("token");
+    headers.append("Authorization", token);
+    return this.http.post(`${this.host}add`, data, {headers: headers}).map(res => res.json());
   }
 
   // vote
   public onVote(data: vote) {
-    return this.http.post(`${this.host}vote`, data).map(res => res.json());
+    let headers = new Headers();
+    let token = "JWT "+ localStorage.getItem("token");
+    headers.append("Authorization", token);
+    return this.http.post(`${this.host}vote`, data, {headers: headers}).map(res => res.json());
+  }
+
+  // profile
+  public getProfile(username: String) {
+    let headers = new Headers();
+    let token = "JWT "+ localStorage.getItem("token");
+    headers.append("Authorization", token);
+    return this.http.get(`${this.host}profile/${username}`, {headers: headers}).map(res => res.json());
+  }
+
+  // Delete profile
+  public deletePoll(data: deletePoll) {
+    let headers = new Headers();
+    let token = "JWT "+ localStorage.getItem("token");
+    headers.append("Authorization", token);
+    return this.http.delete(`${this.host}delete/${data.username}?poll=${data.pollName}`, {headers: headers}).map(res => res.json())
   }
 }
 
@@ -94,4 +119,9 @@ interface vote {
   username: String,
   voted: String,
   topic: String
+}
+
+interface deletePoll {
+  username: String,
+  pollName: String
 }

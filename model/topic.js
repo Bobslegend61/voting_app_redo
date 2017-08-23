@@ -221,3 +221,33 @@ module.exports.onVote = (data, callback) => {
         }
     })
 }
+
+// user profile
+module.exports.getProfile = (username, callback) => {
+    Topic.findOne({author: username}, (err, profile) => {
+        if(err) {
+            return callback("Error connecting to database");
+        }
+
+        if(profile) {
+            callback(null, profile);
+        }else{
+            return callback("No profile found");
+        }
+    })
+}
+
+// delete poll
+module.exports.deletePoll = (data, callback) => {
+    Topic.findOne({author: data.username}, (err, user) => {
+        if(err) {
+            return callback("Error finding user");
+        }
+
+        if(user) {
+            
+        }else{
+            callback("No user found");
+        }
+    })
+}

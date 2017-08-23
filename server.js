@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
 const passport = require("passport");
-let JwtStrategy = require("passport-jwt").Strategy;
 
 
 // require local dependencies
@@ -44,9 +43,7 @@ app.use(bodyParser.json());
 // morgan
 app.use(morgan('dev'));
 // passport
-passport.use(new JwtStrategy(options, (jwt_payload, done) => {
-    return done(null, true);
-}))
+app.use(passport.initialize());
 // routes
 app.use("/", routes);
 

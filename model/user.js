@@ -69,7 +69,7 @@ module.exports.logIn = (username, password, callback) => {
                     return callback(err);
                 }
                 // sign token
-                let token = jwt.sign({username: username}, config.secret);
+                let token = jwt.sign({username: username}, config.secret, {expiresIn: 60 * 60 });
                 callback(null, {token: token, username: user.username});
             });
         }else {
