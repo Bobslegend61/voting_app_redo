@@ -1,7 +1,5 @@
 // require global package
 const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -33,15 +31,11 @@ mongoose.connection.on("error", (err) => {
 })
 
 // ADD MIDDLEWARE
-// cors
-app.use(cors());
 // body-parser
 // parse application/x-www-form-urlencoded 
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json 
 app.use(bodyParser.json());
-// morgan
-app.use(morgan('dev'));
 // passport
 app.use(passport.initialize());
 // routes
