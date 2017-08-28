@@ -1,4 +1,7 @@
-<div class="container create-polls">
+<div class="align-middle loading">
+  <span class="display-1 text-muted" *ngIf="!pollsForm">Loading...</span>
+</div>
+<div class="container create-polls" *ngIf="pollsForm">
   <p class="h4 text-center text-muted mt-4">Create Poll</p>  
   <hr class="w-25 bg-dark">
   <div class="alert alert-danger" role="alert" *ngIf="errorMessage">{{errorMessage}}</div>

@@ -11,16 +11,21 @@ import { AuthService } from "../../services/auth.service";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  public initialLoadingError: string = null;
   public allTopics: any[];
 
   constructor(private model: ModelService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.model.getAllTopics().subscribe(data => {
-      console.log(data);
-      this.allTopics = data;
+      if(data.success) {
+        this.allTopics = data;
+      }else{
+        this.initialLoadingError = data.message
+      }
+      
     }, err => {
-      console.log("An error occured: Falled to connect to database");
+      this.initialLoadingError = "An error occured: Falled to connect to database. Please check your connection and try again. "+err;
     })
   }
 

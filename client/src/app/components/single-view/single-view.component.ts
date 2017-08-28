@@ -12,6 +12,7 @@ import { AuthService } from "../../services/auth.service";
 })
 export class SingleViewComponent implements OnInit {
   public singleTopic: any;
+  public initialLoadingError: string = null;
   
   public showChart: boolean = true;
 
@@ -28,7 +29,13 @@ export class SingleViewComponent implements OnInit {
 
   ngOnInit() {
     this.model.getSingleTopic(this.route.snapshot.params["username"],this.route.snapshot.queryParams["topic"]).subscribe(data => {
-      this.singleTopic = data.data;
+      if(data.success) {
+        this.singleTopic = data.data;
+      }else{
+        this.initialLoadingError = data.message;
+      }
+    }, err => {
+      this.initialLoadingError = "An error occured: Falled to connect to database. Please check your connection and try again. "+err;
     });    
   }
 
@@ -136,9 +143,7 @@ export class SingleViewComponent implements OnInit {
 
     this.model.onVote(data).subscribe(data => {
       this.voteSpinner = false;
-      if(data.success) {
-        console.log(data);
-        
+      if(data.success) {        
         this.singleTopic = data.data;
         this.showChart = !this.showChart;
         if(localStorage.getItem("votes")){

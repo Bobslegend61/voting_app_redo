@@ -1,4 +1,8 @@
-<div class="container my-3" id="home">
+<div class="align-middle loading">
+  <span class="display-1 text-muted" *ngIf="!allTopics">Loading...</span>
+  <span class="alert alert-warning" role="alert" *ngIf="initialLoadingError">{{initialLoadingError}}</span>
+</div>
+<div class="container my-3" id="home" *ngIf="allTopics">
   <button type="button" class="btn btn-light btn-sm btn-block m-3" routerLink="/createpoll" *ngIf="auth.loggedIn()">Create Poll</button>
   <div *ngIf="allTopics">
     <div class="row" *ngFor="let item of allTopics.data">
