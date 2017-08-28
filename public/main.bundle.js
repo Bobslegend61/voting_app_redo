@@ -616,7 +616,7 @@ var NavbarComponent = (function () {
     };
     NavbarComponent.prototype.logout = function () {
         this.username = null;
-        localStorage.clear();
+        localStorage.removeItem("token");
         this.router.navigate(["/home"]);
         return false;
     };
