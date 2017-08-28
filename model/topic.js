@@ -245,7 +245,18 @@ module.exports.deletePoll = (data, callback) => {
         }
 
         if(user) {
-            
+            user.topic.find((topic, index) => {
+                if(topic.title === data.topic) {
+                    user.topic.splice(index, 1);
+                    user.save((err, user) => {
+                        if(err) {
+                           return callback("Error saving")
+                        }
+
+                        return callback(null, user);
+                    })
+                }
+            })
         }else{
             callback("No user found");
         }

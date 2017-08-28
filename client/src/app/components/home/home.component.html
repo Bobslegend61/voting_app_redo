@@ -7,7 +7,7 @@
           <div class="card-body">
             <h4 class="card-title">{{s.title}} <small class="float-right font-italic text-muted">{{s.date | date}}</small></h4>
             <p class="card-text">{{s.info}}</p>
-            <a (click)="goSingle(item.author, s.title)" href="#" class="btn btn-light">View</a>
+            <a (click)="auth.goSingle(item.author, s.title)" href="#" class="btn btn-light">View</a>
           </div>
         </div>
       </div>

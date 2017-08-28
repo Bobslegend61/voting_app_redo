@@ -117,11 +117,53 @@ export class SingleViewComponent implements OnInit {
       topic: this.route.snapshot.queryParams["topic"]
     }
 
+    if(localStorage.getItem("votes")) {
+      let check = JSON.parse(localStorage.getItem("votes")).find((user) => {
+        return user.username == this.route.snapshot.params["username"];
+      });
+      if(check) {
+        let voted = check.topic.find((topic) => {
+          return topic == data.topic
+        });
+
+        if(voted) {
+          this.voteSpinner = false;
+          return this.voteErrorMessage = "You can't vote twice";
+        }
+      }
+        
+    }
+
     this.model.onVote(data).subscribe(data => {
       this.voteSpinner = false;
       if(data.success) {
+        console.log(data);
+        
         this.singleTopic = data.data;
         this.showChart = !this.showChart;
+        if(localStorage.getItem("votes")){
+          let check = JSON.parse(localStorage.getItem("votes")).find((user) => {
+            return user.username == this.route.snapshot.params["username"];
+          });
+          if(check) {
+            let votes = JSON.parse(localStorage.getItem("votes"));
+            for(let i=0; i < votes.length; i++) {
+              if(votes[i].username == this.route.snapshot.params["username"]){
+                votes[i].topic.push(data.data.title);
+              }
+            }
+
+            localStorage.setItem("votes", JSON.stringify(votes));
+          }else{
+            let votes = JSON.parse(localStorage.getItem("votes"));
+            votes.push({username: this.route.snapshot.params["username"], topic: [data.data.title]});
+            localStorage.setItem("votes", JSON.stringify(votes));
+          }
+          
+        }else{
+          localStorage.setItem("votes", JSON.stringify([{username: this.route.snapshot.params["username"], topic: [data.data.title]}]));
+        }
+        
       }else{
         this.voteErrorMessage = data.message;
       }

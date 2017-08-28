@@ -2,6 +2,6 @@
   <h3 class="text-center">{{username | uppercase}}</h3>
   <h6 class="mt-5 text-center "><i class="fa fa-fire text-warning fa-2x" aria-hidden="true"></i> Your polls <i class="fa fa-fire text-warning fa-2x" aria-hidden="true"></i></h6>
   <ul class="list-group">
-    <li class="list-group-item" *ngFor="let topic of profile">{{topic.title}} <button class="btn btn-danger btn-sm float-right">Delete</button></li>
+    <li class="list-group-item" *ngFor="let topic of profile">{{topic.title}} <button class="btn btn-danger btn-sm float-right" (click)="deletePoll(topic.title)">Delete</button><button class="btn btn-primary btn-sm mr-1 float-right" (click)="auth.goSingle(username, topic.title)">View</button></li>
   </ul>
 </div>

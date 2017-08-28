@@ -27,4 +27,23 @@ export class ProfileComponent implements OnInit {
    })
   }
 
+  public deletePoll(value) {
+    console.log(value);
+    let data:any = {
+      username: this.username,
+      pollName: value
+    }
+    
+    this.model.deletePoll(data).subscribe(data => {
+      if(data.success){
+        this.profile = data.data.topic
+      }else{
+        console.log(data.message);
+        
+      }
+      
+    }, err => {
+      console.log("Error reach database");
+    })
+  }
 }

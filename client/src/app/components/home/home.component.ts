@@ -24,8 +24,8 @@ export class HomeComponent implements OnInit {
     })
   }
 
-    public goSingle(username, topic) {
-      this.router.navigate(["/view/"+username], {queryParams: {topic: topic}});
-      return false;
-    }
+    // public goSingle(username, topic) {
+    //   this.router.navigate(["/view/"+username], {queryParams: {topic: topic}});
+    //   return false;
+    // }
 }

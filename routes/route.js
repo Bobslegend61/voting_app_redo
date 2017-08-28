@@ -159,7 +159,7 @@ router.post("/add", passport.authenticate("jwt", {session: false}), (req, res) =
     })
 })
 
-router.post("/vote", passport.authenticate("jwt", {session: false}), (req, res) => {
+router.post("/vote", (req, res) => {
     let data = {
         username: req.body.username.toLowerCase(),
         topic: req.body.topic,
@@ -199,9 +199,23 @@ router.get("/profile/:username", passport.authenticate("jwt", {session: false}),
 
 router.delete("/delete/:username", passport.authenticate("jwt", {session: false}), (req, res) => {
     let data = { 
-        username: req.param.username.toLowerCase(),
+        username: req.user.username.toLowerCase(),
         topic: req.query.poll
     }
+
+    Topic.deletePoll(data,  (err, profile) => {
+        if(err) {
+            return res.json({
+                success: false,
+                message: err
+            })
+        }
+
+        res.json({
+            success: true,
+            data: profile
+        })
+    })
 })
 
 module.exports = router;
