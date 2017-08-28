@@ -158,10 +158,10 @@ exports.push([module.i, "/*!\n *  Font Awesome 4.7.0 by @davegandy - http://font
 
 exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.google.com/?selection.family=Lateef);", ""]);
 
 // module
-exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\nbody {\n    font-family: cursive;\n    line-height: 1.8;\n}\n\n.loading {\n    font-family: -apple-system, BlinkMacSystemFont, \"San Francisco\", \"Segoe UI\", Roboto, Ubuntu, \"Helvetica Neue\", Arial, sans-serif;\n    text-align: center;\n    font-weight: 100;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%,-50%);\n            transform: translate(-50%,-50%);\n}", ""]);
+exports.push([module.i, "/* You can add global styles to this file, and also import other style files */\n/* google font */\n\nbody {\n    font-family: 'Lateef';\n    line-height: 1.8;\n}\n\n.loading {\n    font-family: 'Lateef';\n    text-align: center;\n    font-weight: 100;\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    -webkit-transform: translate(-50%,-50%);\n            transform: translate(-50%,-50%);\n}", ""]);
 
 // exports
 

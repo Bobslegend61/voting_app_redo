@@ -16,11 +16,13 @@ import { SingleViewComponent } from './components/single-view/single-view.compon
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 
 // SERVICES
 import { ModelService } from "./services/model.service";
 import { AuthService } from "./services/auth.service";
 import { AuthGuard } from "./guard/guard.service";
+
 
 
 // define routes
@@ -29,7 +31,8 @@ const appRoutes: Routes = [
   { path: "home", component: HomeComponent },
   { path: "createpoll", component: CreatePollComponent, canActivate: [AuthGuard] },
   { path: "view/:username", component: SingleViewComponent },
-  { path: "profile/:username", component: ProfileComponent, canActivate: [AuthGuard] }
+  { path: "profile/:username", component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: "**", component: ErrorPageComponent }
 ];
 
 @NgModule({
@@ -43,7 +46,8 @@ const appRoutes: Routes = [
     SingleViewComponent,
     BarChartComponent,
     PieChartComponent,
-    ProfileComponent
+    ProfileComponent,
+    ErrorPageComponent
   ],
   imports: [
     BrowserModule,

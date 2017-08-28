@@ -91,9 +91,10 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_bar_chart_bar_chart_component__ = __webpack_require__("../../../../../src/app/components/bar-chart/bar-chart.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_pie_chart_pie_chart_component__ = __webpack_require__("../../../../../src/app/components/pie-chart/pie-chart.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_profile_profile_component__ = __webpack_require__("../../../../../src/app/components/profile/profile.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__services_model_service__ = __webpack_require__("../../../../../src/app/services/model.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__guard_guard_service__ = __webpack_require__("../../../../../src/app/guard/guard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_error_page_error_page_component__ = __webpack_require__("../../../../../src/app/components/error-page/error-page.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__services_model_service__ = __webpack_require__("../../../../../src/app/services/model.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__services_auth_service__ = __webpack_require__("../../../../../src/app/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__guard_guard_service__ = __webpack_require__("../../../../../src/app/guard/guard.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -117,6 +118,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 // SERVICES
 
 
@@ -125,9 +127,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var appRoutes = [
     { path: "", component: __WEBPACK_IMPORTED_MODULE_7__components_mainpage_mainpage_component__["a" /* MainpageComponent */] },
     { path: "home", component: __WEBPACK_IMPORTED_MODULE_9__components_home_home_component__["a" /* HomeComponent */] },
-    { path: "createpoll", component: __WEBPACK_IMPORTED_MODULE_11__components_create_poll_create_poll_component__["a" /* CreatePollComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_18__guard_guard_service__["a" /* AuthGuard */]] },
+    { path: "createpoll", component: __WEBPACK_IMPORTED_MODULE_11__components_create_poll_create_poll_component__["a" /* CreatePollComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_19__guard_guard_service__["a" /* AuthGuard */]] },
     { path: "view/:username", component: __WEBPACK_IMPORTED_MODULE_12__components_single_view_single_view_component__["a" /* SingleViewComponent */] },
-    { path: "profile/:username", component: __WEBPACK_IMPORTED_MODULE_15__components_profile_profile_component__["a" /* ProfileComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_18__guard_guard_service__["a" /* AuthGuard */]] }
+    { path: "profile/:username", component: __WEBPACK_IMPORTED_MODULE_15__components_profile_profile_component__["a" /* ProfileComponent */], canActivate: [__WEBPACK_IMPORTED_MODULE_19__guard_guard_service__["a" /* AuthGuard */]] },
+    { path: "**", component: __WEBPACK_IMPORTED_MODULE_16__components_error_page_error_page_component__["a" /* ErrorPageComponent */] }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -146,7 +149,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_12__components_single_view_single_view_component__["a" /* SingleViewComponent */],
             __WEBPACK_IMPORTED_MODULE_13__components_bar_chart_bar_chart_component__["a" /* BarChartComponent */],
             __WEBPACK_IMPORTED_MODULE_14__components_pie_chart_pie_chart_component__["a" /* PieChartComponent */],
-            __WEBPACK_IMPORTED_MODULE_15__components_profile_profile_component__["a" /* ProfileComponent */]
+            __WEBPACK_IMPORTED_MODULE_15__components_profile_profile_component__["a" /* ProfileComponent */],
+            __WEBPACK_IMPORTED_MODULE_16__components_error_page_error_page_component__["a" /* ErrorPageComponent */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -156,7 +160,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__angular_router__["c" /* RouterModule */].forRoot(appRoutes),
             __WEBPACK_IMPORTED_MODULE_5_ng2_charts__["ChartsModule"]
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_16__services_model_service__["a" /* ModelService */], __WEBPACK_IMPORTED_MODULE_17__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_18__guard_guard_service__["a" /* AuthGuard */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_17__services_model_service__["a" /* ModelService */], __WEBPACK_IMPORTED_MODULE_18__services_auth_service__["a" /* AuthService */], __WEBPACK_IMPORTED_MODULE_19__guard_guard_service__["a" /* AuthGuard */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
@@ -262,7 +266,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/create-poll/create-poll.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-1 text-muted\" *ngIf=\"!pollsForm\">Loading...</span>\n</div>\n<div class=\"container create-polls\" *ngIf=\"pollsForm\">\n  <p class=\"h4 text-center text-muted mt-4\">Create Poll</p>  \n  <hr class=\"w-25 bg-dark\">\n  <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n  <form class=\"w-75 mx-auto\" [formGroup]=\"pollsForm\" #pollForm (ngSubmit)=\"submitPoll()\">\n    <div class=\"form-group mb-3\">\n      <label for=\"title\">Title</label>\n      <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Topic title\" formControlName=\"title\">\n      <p class=\"text-danger\" *ngIf=\"pollsForm.controls['title'].hasError('required') && pollsForm.controls['title'].dirty\">* Field is required</p>\n    </div>\n    <div class=\"from-group mb-3\">\n      <label for=\"info\">Info</label>\n      <textarea placeholder=\"A little info about the topic\" id=\"info\" class=\"form-control\" formControlName=\"info\"></textarea>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"options\">Your Options</label>\n      <input type=\"text\" class=\"form-control\" id=\"options\" placeholder=\"Comma (,) seperated please\" formControlName=\"options\">\n      <small id=\"options\" class=\"form-text text-muted\">Comma (,) seperated please</small>\n    </div>\n    <button type=\"submit\" class=\"btn btn-outline-secondary btn-block btn-lg\">Create poll</button>\n  </form>\n</div>"
+module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-3 text-muted\" *ngIf=\"!pollsForm\">Loading...</span>\n</div>\n<div class=\"container create-polls\" *ngIf=\"pollsForm\">\n  <p class=\"h4 text-center text-muted mt-4\">Create Poll</p>  \n  <hr class=\"w-25 bg-dark\">\n  <div class=\"alert alert-danger\" role=\"alert\" *ngIf=\"errorMessage\">{{errorMessage}}</div>\n  <form class=\"w-75 mx-auto\" [formGroup]=\"pollsForm\" #pollForm (ngSubmit)=\"submitPoll()\">\n    <div class=\"form-group mb-3\">\n      <label for=\"title\">Title</label>\n      <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Topic title\" formControlName=\"title\">\n      <p class=\"text-danger\" *ngIf=\"pollsForm.controls['title'].hasError('required') && pollsForm.controls['title'].dirty\">* Field is required</p>\n    </div>\n    <div class=\"from-group mb-3\">\n      <label for=\"info\">Info</label>\n      <textarea placeholder=\"A little info about the topic\" id=\"info\" class=\"form-control\" formControlName=\"info\"></textarea>\n    </div>\n    <div class=\"form-group\">\n      <label for=\"options\">Your Options</label>\n      <input type=\"text\" class=\"form-control\" id=\"options\" placeholder=\"Comma (,) seperated please\" formControlName=\"options\">\n      <small id=\"options\" class=\"form-text text-muted\">Comma (,) seperated please</small>\n    </div>\n    <button type=\"submit\" class=\"btn btn-outline-secondary btn-block btn-lg\">Create poll</button>\n  </form>\n</div>"
 
 /***/ }),
 
@@ -338,6 +342,67 @@ CreatePollComponent = __decorate([
 
 var _a, _b, _c, _d;
 //# sourceMappingURL=create-poll.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/error-page/error-page.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/error-page/error-page.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"loading lert alert-warning p-5\" role=\"alert\">\n  <i class=\"fa fa-exclamation-triangle fa-3x\" aria-hidden=\"true\"></i>\n  <p class=\"display-3\">404</p>\n  <p>Page not found.</p>\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/components/error-page/error-page.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ErrorPageComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ErrorPageComponent = (function () {
+    function ErrorPageComponent() {
+    }
+    ErrorPageComponent.prototype.ngOnInit = function () {
+    };
+    return ErrorPageComponent;
+}());
+ErrorPageComponent = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-error-page',
+        template: __webpack_require__("../../../../../src/app/components/error-page/error-page.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/components/error-page/error-page.component.css")]
+    }),
+    __metadata("design:paramtypes", [])
+], ErrorPageComponent);
+
+//# sourceMappingURL=error-page.component.js.map
 
 /***/ }),
 
@@ -423,7 +488,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-1 text-muted\" *ngIf=\"!allTopics\">Loading...</span>\n  <span class=\"alert alert-warning\" role=\"alert\" *ngIf=\"initialLoadingError\">{{initialLoadingError}}</span>\n</div>\n<div class=\"container my-3\" id=\"home\" *ngIf=\"allTopics\">\n  <button type=\"button\" class=\"btn btn-light btn-sm btn-block m-3\" routerLink=\"/createpoll\" *ngIf=\"auth.loggedIn()\">Create Poll</button>\n  <div *ngIf=\"allTopics\">\n    <div class=\"row\" *ngFor=\"let item of allTopics.data\">\n      <div class=\"col-sm-12 col-md-6 mb-2\" *ngFor=\"let s of item.topic\">\n        <div class=\"card\">\n          <div class=\"card-body\">\n            <h4 class=\"card-title\">{{s.title}} <small class=\"float-right font-italic text-muted\">{{s.date | date}}</small></h4>\n            <p class=\"card-text\">{{s.info}}</p>\n            <a (click)=\"auth.goSingle(item.author, s.title)\" href=\"#\" class=\"btn btn-light\">View</a>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-3 text-muted\" *ngIf=\"!allTopics\">Loading...</span>\n  <span class=\"alert alert-warning\" role=\"alert\" *ngIf=\"initialLoadingError\">{{initialLoadingError}}</span>\n</div>\n<div class=\"container my-3\" id=\"home\" *ngIf=\"allTopics\">\n  <button type=\"button\" class=\"btn btn-light btn-sm btn-block m-3\" routerLink=\"/createpoll\" *ngIf=\"auth.loggedIn()\">Create Poll</button>\n  <div *ngIf=\"allTopics\">\n    <div class=\"row\" *ngFor=\"let item of allTopics.data\">\n      <div class=\"col-sm-12 col-md-6 mb-2\" *ngFor=\"let s of item.topic\">\n        <div class=\"card\">\n          <div class=\"card-body\">\n            <h4 class=\"card-title\">{{s.title}} <small class=\"float-right font-italic text-muted\">{{s.date | date}}</small></h4>\n            <p class=\"card-text\">{{s.info}}</p>\n            <a (click)=\"auth.goSingle(item.author, s.title)\" href=\"#\" class=\"btn btn-light\">View</a>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -785,7 +850,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/profile/profile.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-1 text-muted\" *ngIf=\"!profile\">Loading...</span>\n  <span class=\"alert alert-warning\" role=\"alert\" *ngIf=\"initialLoadingError\">{{initialLoadingError}}</span>\n</div>\n<div class=\"container mt-3 text-muted\" *ngIf=\"profile\">\n  <h3 class=\"text-center\">{{username | uppercase}}</h3>\n  <h6 class=\"mt-5 text-center \"><i class=\"fa fa-fire text-warning fa-2x\" aria-hidden=\"true\"></i> Your polls <i class=\"fa fa-fire text-warning fa-2x\" aria-hidden=\"true\"></i></h6>\n  <div class=\"alert alert-danger text-center\" role=\"alert\" *ngIf=\"deleteError\">\n    {{deleteError}}\n  </div>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\" *ngFor=\"let topic of profile\">{{topic.title}} <button class=\"btn btn-danger btn-sm float-right\" (click)=\"deletePoll(topic.title)\" [disabled]=\"disable\">Delete</button><button class=\"btn btn-primary btn-sm mr-1 float-right\" (click)=\"auth.goSingle(username, topic.title)\">View</button></li>\n  </ul>\n</div>"
+module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-3 text-muted\" *ngIf=\"!profile\">Loading...</span>\n  <span class=\"alert alert-warning\" role=\"alert\" *ngIf=\"initialLoadingError\">{{initialLoadingError}}</span>\n</div>\n<div class=\"container mt-3 text-muted\" *ngIf=\"profile\">\n  <h3 class=\"text-center\">{{username | uppercase}}</h3>\n  <h6 class=\"mt-5 text-center \"><i class=\"fa fa-fire text-warning fa-2x\" aria-hidden=\"true\"></i> Your polls <i class=\"fa fa-fire text-warning fa-2x\" aria-hidden=\"true\"></i></h6>\n  <div class=\"alert alert-danger text-center\" role=\"alert\" *ngIf=\"deleteError\">\n    {{deleteError}}\n  </div>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\" *ngFor=\"let topic of profile\">{{topic.title}} <button class=\"btn btn-danger btn-sm float-right\" (click)=\"deletePoll(topic.title)\" [disabled]=\"disable\">Delete</button><button class=\"btn btn-primary btn-sm mr-1 float-right\" (click)=\"auth.goSingle(username, topic.title)\">View</button></li>\n  </ul>\n</div>"
 
 /***/ }),
 
@@ -888,7 +953,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/components/single-view/single-view.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-1 text-muted\" *ngIf=\"!singleTopic\">Loading...</span>\n  <span class=\"alert alert-warning\" role=\"alert\" *ngIf=\"initialLoadingError\">{{initialLoadingError}}</span>\n</div>\n<div class=\"container mt-2\" *ngIf=\"singleTopic\">\n    <div class=\"card text-dark bg-light mb-3\" *ngIf=\"singleTopic\">\n        <div class=\"card-header text-center\">{{singleTopic.title}}</div>\n        <div class=\"card-body\">\n          <h4 class=\"card-title text-center\">{{singleTopic.info}}</h4>\n          <div class=\"card-text row\">\n            <div class=\"col-sm-12 sm-push-12 col-md-4\">\n              <p class=\"text-info\">Click <i class=\"fa fa-hand-o-down\" aria-hidden=\"true\"></i> to vote</p>\n              <span class=\"text-center d-block\" *ngIf=\"voteSpinner\"><i class=\"fa fa-circle-o-notch fa-spin\" aria-hidden=\"true\"></i></span>\n              <span class=\"text-center d-block text-danger\" *ngIf=\"voteErrorMessage\">{{voteErrorMessage}}</span>\n              <div *ngFor=\"let item of singleTopic.options\">\n                  <span class=\"badge badge-pill badge-dark w-100\" (click)=\"vote(item.item)\">{{item.item}} <span class=\"badge badge-secondary float-right\">{{item.count}}</span></span>\n              </div>\n              <form #addFormRef=\"ngForm\" (ngSubmit)=\"addOptions(addFormRef, addFormRef.value)\" *ngIf=\"auth.loggedIn()\">\n                  <div class=\"form-group\">\n                    <label for=\"add\" class=\"text-success\">Add More</label>\n                    <input type=\"text\" name=\"add\" ngModel #addRef=\"ngModel\" class=\"form-control\" placeholder=\"comma (,) seperated please\" required>\n                    <span class=\"text-danger\" *ngIf=\"addRef.invalid && addRef.dirty\">* Required</span>\n                  </div>\n                  <button class=\"btn btn-light btn-sm float-right\">Submit <i *ngIf=\"addOptionsSpin\" class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i></button>\n                </form>\n            </div>\n            <div class=\"col-sm-12 sm-pull-12 col-md-8\">\n                <button class=\"btn btn-dark btn-sm\" (click)=\"toggleChart()\">Toggle Chart</button>\n                <app-bar-chart [singleTopic]=\"singleTopic\" *ngIf=\"showChart\"></app-bar-chart>\n                <app-pie-chart [singleTopic]=\"singleTopic\" *ngIf=\"!showChart\"></app-pie-chart>\n            </div>\n          </div>\n          <div class=\"mt-4\">\n            <h4>Comments</h4>\n            <div class=\"card mb-3\" *ngFor=\"let comment of singleTopic.comments\">\n              <div class=\"card-body\">\n                <h4 class=\"card-title\">{{comment.name}}</h4>\n                <p class=\"card-text\">{{comment.said}}</p>\n                <p class=\"card-text\"><small class=\"text-muted\">{{comment.date | date}}</small></p>\n              </div>\n            </div>\n          </div>\n          <div>\n            <h4>Comment</h4>\n            <form class=\"w-75 mt-4\" #commentForm=\"ngForm\" (ngSubmit)=\"submitComment(commentForm, commentForm.value)\">\n                <div *ngIf=\"addCommentErrorMessage\" class=\"alert alert-danger\" role=\"alert\">{{addCommentErrorMessage}}</div>\n              <div class=\"form-group\">\n                <label for=\"name\">Name</label>\n                <input type=\"text\" name=\"name\" #nameRef=\"ngModel\" class=\"form-control\" ngModel required>\n                <span class=\"text-danger\" *ngIf=\"nameRef.invalid && nameRef.dirty\">* Field is required</span>\n              </div>\n              {{nameRef.className}}\n              <div class=\"form-group\">\n                <label for=\"comment\">Comment</label>\n                <textarea name=\"comment\" id=\"comment\" #commentTextRef=\"ngModel\" ngModel cols=\"30\" rows=\"10\" class=\"form-control\" required></textarea>\n                <span class=\"text-danger\" *ngIf=\"commentTextRef.invalid && commentTextRef.dirty\">* Field is required</span>\n              </div>\n              <button type=\"submit\" class=\"btn btn-dark float-right\" [disabled]=\"nameRef.invalid || commentTextRef.invalid\">Submit <i *ngIf=\"addCommentSpin\" class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i></button>\n            </form>\n          </div>\n        </div>\n      </div>\n</div>\n"
+module.exports = "<div class=\"align-middle loading\">\n  <span class=\"display-3 text-muted\" *ngIf=\"!singleTopic\">Loading...</span>\n  <span class=\"alert alert-warning\" role=\"alert\" *ngIf=\"initialLoadingError\">{{initialLoadingError}}</span>\n</div>\n<div class=\"container mt-2\" *ngIf=\"singleTopic\">\n    <div class=\"card text-dark bg-light mb-3\" *ngIf=\"singleTopic\">\n        <div class=\"card-header text-center\">{{singleTopic.title}}</div>\n        <div class=\"card-body\">\n          <h4 class=\"card-title text-center\">{{singleTopic.info}}</h4>\n          <div class=\"card-text row\">\n            <div class=\"col-sm-12 sm-push-12 col-md-4\">\n              <p class=\"text-info\">Click <i class=\"fa fa-hand-o-down\" aria-hidden=\"true\"></i> to vote</p>\n              <span class=\"text-center d-block\" *ngIf=\"voteSpinner\"><i class=\"fa fa-circle-o-notch fa-spin\" aria-hidden=\"true\"></i></span>\n              <span class=\"text-center d-block text-danger\" *ngIf=\"voteErrorMessage\">{{voteErrorMessage}}</span>\n              <div *ngFor=\"let item of singleTopic.options\">\n                  <span class=\"badge badge-pill badge-dark w-100\" (click)=\"vote(item.item)\">{{item.item}} <span class=\"badge badge-secondary float-right\">{{item.count}}</span></span>\n              </div>\n              <form #addFormRef=\"ngForm\" (ngSubmit)=\"addOptions(addFormRef, addFormRef.value)\" *ngIf=\"auth.loggedIn()\">\n                  <div class=\"form-group\">\n                    <label for=\"add\" class=\"text-success\">Add More</label>\n                    <input type=\"text\" name=\"add\" ngModel #addRef=\"ngModel\" class=\"form-control\" placeholder=\"comma (,) seperated please\" required>\n                    <span class=\"text-danger\" *ngIf=\"addRef.invalid && addRef.dirty\">* Required</span>\n                  </div>\n                  <button class=\"btn btn-light btn-sm float-right\">Submit <i *ngIf=\"addOptionsSpin\" class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i></button>\n                </form>\n            </div>\n            <div class=\"col-sm-12 sm-pull-12 col-md-8\">\n                <button class=\"btn btn-dark btn-sm\" (click)=\"toggleChart()\">Toggle Chart</button>\n                <app-bar-chart [singleTopic]=\"singleTopic\" *ngIf=\"showChart\"></app-bar-chart>\n                <app-pie-chart [singleTopic]=\"singleTopic\" *ngIf=\"!showChart\"></app-pie-chart>\n            </div>\n          </div>\n          <div class=\"mt-4\">\n            <h4>Comments</h4>\n            <div class=\"card mb-3\" *ngFor=\"let comment of singleTopic.comments\">\n              <div class=\"card-body\">\n                <h4 class=\"card-title\">{{comment.name}}</h4>\n                <p class=\"card-text\">{{comment.said}}</p>\n                <p class=\"card-text\"><small class=\"text-muted\">{{comment.date | date}}</small></p>\n              </div>\n            </div>\n          </div>\n          <div>\n            <h4>Comment</h4>\n            <form class=\"w-75 mt-4\" #commentForm=\"ngForm\" (ngSubmit)=\"submitComment(commentForm, commentForm.value)\">\n                <div *ngIf=\"addCommentErrorMessage\" class=\"alert alert-danger\" role=\"alert\">{{addCommentErrorMessage}}</div>\n              <div class=\"form-group\">\n                <label for=\"name\">Name</label>\n                <input type=\"text\" name=\"name\" #nameRef=\"ngModel\" class=\"form-control\" ngModel required>\n                <span class=\"text-danger\" *ngIf=\"nameRef.invalid && nameRef.dirty\">* Field is required</span>\n              </div>\n              {{nameRef.className}}\n              <div class=\"form-group\">\n                <label for=\"comment\">Comment</label>\n                <textarea name=\"comment\" id=\"comment\" #commentTextRef=\"ngModel\" ngModel cols=\"30\" rows=\"10\" class=\"form-control\" required></textarea>\n                <span class=\"text-danger\" *ngIf=\"commentTextRef.invalid && commentTextRef.dirty\">* Field is required</span>\n              </div>\n              <button type=\"submit\" class=\"btn btn-dark float-right\" [disabled]=\"nameRef.invalid || commentTextRef.invalid\">Submit <i *ngIf=\"addCommentSpin\" class=\"fa fa-spinner fa-spin\" aria-hidden=\"true\"></i></button>\n            </form>\n          </div>\n        </div>\n      </div>\n</div>\n"
 
 /***/ }),
 

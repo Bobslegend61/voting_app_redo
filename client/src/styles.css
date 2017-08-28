@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+/* google font */
+@import url("https://fonts.google.com/?selection.family=Lateef");
+
 body {
-    font-family: cursive;
+    font-family: 'Lateef';
     line-height: 1.8;
 }
 
 .loading {
-    font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Lateef';
     text-align: center;
     font-weight: 100;
     position: absolute;
