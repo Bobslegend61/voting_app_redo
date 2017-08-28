@@ -43,6 +43,11 @@ app.use("/", routes);
 // static dir
 app.use(express.static(path.join(__dirname, "public")));
 
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+    res.sendFile(path.join(__dirname, "./public/index.html"));
+});
+
 
 
 // listen
