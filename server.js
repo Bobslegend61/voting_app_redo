@@ -46,7 +46,6 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 // routes
 app.use("/", routes);
-
 // static dir
 app.use(express.static(path.join(__dirname, "public")));
 

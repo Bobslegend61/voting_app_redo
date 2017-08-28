@@ -4,7 +4,7 @@ import "rxjs/add/operator/map";
 
 @Injectable()
 export class ModelService {
-  host: String = "http://localhost:3000/";
+  host: String = "/";
 
   constructor(private http: Http) { }
   
